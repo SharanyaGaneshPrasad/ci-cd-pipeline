@@ -7,11 +7,6 @@ pipeline {
                 echo 'Building  stage'
             }
         }
-        #stage('Test') {
-            #steps {
-                #echo 'Testing stage'
-            #}
-        #}
         stage('Test') {
             steps {
                     input('Do you want to proceed?')
