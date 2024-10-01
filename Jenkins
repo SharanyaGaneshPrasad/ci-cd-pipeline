@@ -1,21 +1,38 @@
 pipeline {
-    agent any
-
+    agent any  // Run on any available agent
+    
     stages {
         stage('Build') {
             steps {
-                echo 'Building  stage'
+                echo 'Building...'  // Print a message
+                sh 'make build'     // Execute shell command
             }
         }
+        
         stage('Test') {
             steps {
-                    input('Do you want to proceed?')
+                echo 'Running Tests...'
+                sh 'make test'      // Execute shell command for testing
             }
         }
+        
         stage('Deploy') {
             steps {
-                echo 'Deploy stage'
+                echo 'Deploying...'
+                sh 'make deploy'    // Execute shell command for deployment
             }
+        }
+    }
+
+    post {
+        always {
+            echo 'Pipeline completed!'  // Always run after the pipeline finishes
+        }
+        success {
+            echo 'Pipeline succeeded!'  // Run if the pipeline succeeds
+        }
+        failure {
+            echo 'Pipeline failed!'     // Run if the pipeline fails
         }
     }
 }
